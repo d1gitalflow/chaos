@@ -5,30 +5,16 @@ const app = express(); //função exportada, pode-se dizer que iniciou um "objec
 //importa de /controllers/error.js
 const errorController = require('./controllers/error');
 
-//handlebars
-//const expressHbs = require('express-handlebars');
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-//instalar handlebars
-//extname:'hbs' <= para não ter este erro:Error: ENOENT: no such file or directory, open 'open/c:,etc,'
-// app.engine(
-//     'hbs',
-//     expressHbs({layoutDir: 'views/layouts/',
-//         defaultLayout:'main-layout',
-//         extname:'hbs'
-//     })
-// ); //expressHbs é uma função que se pode chamar
+//theme engine .ejs setup
 app.set('view engine','ejs');
 app.set('views','views');
 
-//pug é built-in ... expressHandleBars não é built-in
-//global configuration value (keys, config items)... ATENÇÃO AO SET
-//pug tem supporte para o express, e auto regista-se com express
-//app.set('view engine','pug');
-//dir 'views' (era o nome) + 'views' que indica como na API express (n tenho certeza)
-//app.set('views','views');
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+
+
 
 //linha de parser de requests do 'body-parser'
 app.use(bodyParser.urlencoded({extended: false}));

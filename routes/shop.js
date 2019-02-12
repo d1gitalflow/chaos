@@ -6,7 +6,7 @@ const router = express.Router();
 const productsController = require ('../controllers/products');
 
 //este path '/' é executado em 1º lugar
-router.get('/',productsController.getProduct);
+router.get('/',productsController.getProducts);
 
 
 module.exports = router;
