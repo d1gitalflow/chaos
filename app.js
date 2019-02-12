@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');//exporta uma função
 const bodyParser = require('body-parser'); //parser de requests
 const app = express(); //função exportada, pode-se dizer que iniciou um "objecto"
+//importa de /controllers/error.js
+const errorController = require('./controllers/error');
 
 //handlebars
 //const expressHbs = require('express-handlebars');
@@ -41,22 +43,12 @@ app.use(express.static(path.join(__dirname,'public')));
 //filtrar routes com neste caso /admin/...
 //QUANDO SE USA .use  TER EM ATENÇÃO A ORDEM... é melhor
 //usar os .get e .post
-app.use('/admin',adminRoutes.routes); //vem do export do admin.js
+app.use('/admin',adminRoutes);
 app.use(shopRoutes);
 
 //pagina 404 not found
-app.use((req,res,next)=>{
-
-    //render('404') vê logo no file 404.pug
-    //render('404') vê logo no file 404.ejs e envia o objeto key 'pageTitle'
-    res.status(404).render('404',{pageTitle:'Page not find!'});
-
-    //por ser um erro não esquecer de ligar o .status(404)
-    //res.status(404).sendFile(path.join(__dirname,'views','404.html'));
-
-    //HTML servido em cima diretamente para a pasta error404.html
-    //res.status(404).send('<h1>Page not found</h1>');
-});
+//import de errorController/error.js
+app.use(errorController.get404);
 
 
 
